@@ -3,10 +3,12 @@
 uniform float t_input01 = 1.0;
 uniform float t_input02 = 1.0;
 uniform float t_input03 = 1.0;
+uniform float t_input04 = 1.0;
 
 uniform sampler2DRect input01;
 uniform sampler2DRect input02;
 uniform sampler2DRect input03;
+uniform sampler2DRect input04;
 
 void main(void)
 {
@@ -15,10 +17,10 @@ void main(void)
     vec4 p_input01 = texture2DRect(input01, texCoord);
     vec4 p_input02 = texture2DRect(input02, texCoord);
     vec4 p_input03 = texture2DRect(input03, texCoord);
-
+    vec4 p_input04 = texture2DRect(input04, texCoord);
     
     gl_FragColor   =   t_input01 * p_input01   +   t_input02 * p_input02
-                     + t_input03 * p_input03;
+                     + t_input03 * p_input03   +   t_input04 * p_input04;
     
     //gl_FragColor = p_input01+p_input02;
     //gl_FragColor = vec4(texCoord.x/1280.0f,texCoord.y/720.0f,0,1);

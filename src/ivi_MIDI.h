@@ -1,4 +1,6 @@
 
+#define IVI_OSC_PORT 8000
+#define IVI_OSC_HOST "172.20.10.15"
 
 #define IVI_MIDI_SHW_SPEED 1
 #define IVI_MIDI_SHW_NUMDROPS 2

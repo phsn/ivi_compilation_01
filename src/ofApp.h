@@ -2,15 +2,19 @@
 
 #include "ofMain.h"
 #include "ofxMidi.h"
+#include "ofxOsc.h"
 #include "ofxSyphon.h"
 
 #include "ivi_FFT.h"
 #include "ivi_MIDI.h"
+#include "ivi_BEAT.h"
+#include "ivi_OSC.h"
 
 // SYSTEME
 #include "intro/ivi_Intro.h"
 #include "schwingung/ivi_Schwingung.h"
 #include "rapport/ivi_Rapport.h"
+#include "symmetrie/ivi_Symmetrie.h"
 
 class ofApp : public ofBaseApp, public ofxMidiListener {
 
@@ -30,7 +34,7 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     ivi_Intro       sys_Intro;
     ivi_Schwingung  sys_Schwingung;
     ivi_Rapport     sys_Rapport;
-
+    ivi_Symmetrie   sys_Symmetrie;
 
     //  MIDI EVENT HANDLING ///////////////
     
@@ -47,8 +51,26 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     
     ivi_FFT FFT;
     
-    ///////////////////////////////////////
+    //  SYPHON  ///////////////////////////
     
     ofxSyphonServer iviOutput;
+    
+    //  MULTI-THREADS  ////////////////////
+    
+    ivi_BEAT    beatThread;
+    
+    void        onTickRhythm(ofVec2f & tObj);
+    void        onTick16(ofVec2f & tObj);
+    void        onTick8(ofVec2f & tObj);
+    void        onTick(ofVec2f & tObj);
+    void        onBar(ofVec2f & bObj);
+    void        onBPMChange(ofVec2f & tObj);
+    void        onRhythmChange(ofVec2f & tObj);
+    
+    ivi_OSC     oscThread;
+    
+    void        handleOSC(ofxOscMessage & m);
+    
+    ///////////////////////////////////////
 
 };

@@ -30,7 +30,7 @@
 		<key>95645AD9A5F0E434C34DC6DA162168247135E7C5</key>
 		<string>../..</string>
 		<key>F4CCB893AFADB97238A965FD2F28717F1CAAE613</key>
-		<string>../../../../../addons/ofxSyphon</string>
+		<string>../../../addons/ofxSyphon</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/phsn/ivi_compilation_01.git</string>

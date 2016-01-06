@@ -23,11 +23,30 @@ void ofApp::setup(){
     sys_Intro.setup();
     sys_Schwingung.setup();
     sys_Rapport.setup();
+    sys_Symmetrie.setup(oscThread);
     
     mixerFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
     mixerShader.load( "shader/mixerShader" );
     
     iviOutput.setName("iviOutput");
+    
+    // THREADS  ///////////////////////////
+    
+    ofAddListener(beatThread.tickEvent, this, &ofApp::onTick);
+    ofAddListener(beatThread.tick8Event, this, &ofApp::onTick8);
+    ofAddListener(beatThread.tick16Event, this, &ofApp::onTick16);
+    ofAddListener(beatThread.tickRhythmEvent, this, &ofApp::onTickRhythm);
+    ofAddListener(beatThread.barEvent, this, &ofApp::onBar);
+    
+    ofAddListener(beatThread.bpmChange, this, &ofApp::onBPMChange);
+    ofAddListener(beatThread.rhythmMaskChange, this, &ofApp::onRhythmChange);
+    
+    beatThread.start();
+    
+    ofAddListener(oscThread.messageReceived, this, &ofApp::handleOSC);
+    
+    oscThread.setup(IVI_OSC_HOST,IVI_OSC_PORT);
+    oscThread.start();
 
 }
 
@@ -43,6 +62,7 @@ void ofApp::update(){
     if(t_ch01 > 0) sys_Intro.update(&FFT);
     if(t_ch02 > 0) sys_Schwingung.update();
     if(t_ch03 > 0) sys_Rapport.update(&FFT);
+    if(t_ch04 > 0) sys_Symmetrie.update();
     
 }
 
@@ -52,15 +72,19 @@ void ofApp::draw(){
     ofFbo* sys_IntroFBO = sys_Intro.drawFBO((t_ch01 > 0));
     ofFbo* sys_SchwingungFBO = sys_Schwingung.drawFBO((t_ch02 > 0));
     ofFbo* sys_RapportFBO = sys_Rapport.drawFBO((t_ch03 > 0));
+    ofFbo* sys_SymmetrieFBO = sys_Symmetrie.drawFBO((t_ch04 > 0));
+
     
     mixerShader.begin();
     mixerShader.setUniform1f("t_input01", t_ch01);
     mixerShader.setUniform1f("t_input02", t_ch02);
     mixerShader.setUniform1f("t_input03", t_ch03);
+    mixerShader.setUniform1f("t_input04", t_ch04);
     mixerShader.setUniformTexture("input01", sys_IntroFBO->getTextureReference(),1);
     mixerShader.setUniformTexture("input02", sys_SchwingungFBO->getTextureReference(),2);
     mixerShader.setUniformTexture("input03", sys_RapportFBO->getTextureReference(),3);
-
+    mixerShader.setUniformTexture("input04", sys_SymmetrieFBO->getTextureReference(),4);
+    
     mixerFBO.draw(0,0);
     
     mixerShader.end();
@@ -80,6 +104,47 @@ void ofApp::keyPressed(int key){
     }
 }
 
+
+//--------------------------------------------------------------
+void ofApp::onBar(ofVec2f & bObj){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::onTick(ofVec2f & tObj){
+    oscThread.sendFloat("/BeatState/x", (tObj.y)/3.0f);
+    //cout << "TICK " << tObj.y << endl;
+}
+
+//--------------------------------------------------------------
+void ofApp::onTick8(ofVec2f & tObj){
+    
+}
+
+//--------------------------------------------------------------
+void ofApp::onTick16(ofVec2f & tObj){
+    
+}
+
+//--------------------------------------------------------------
+void ofApp::onTickRhythm(ofVec2f & tObj){
+    sys_Symmetrie.onTickRhythm(tObj);
+}
+
+//--------------------------------------------------------------
+void ofApp::onBPMChange(ofVec2f & tObj){
+    oscThread.sendFloat("/BPM_Slider/x", tObj.x/300.0f);
+}
+
+//--------------------------------------------------------------
+void ofApp::onRhythmChange(ofVec2f & tObj) {
+    oscThread.sendBools("/RhythmMask_01/x", beatThread.getRhythmMask());
+}
+
+void ofApp::handleOSC(ofxOscMessage & m) {
+    beatThread.handleOSC(m);
+    sys_Symmetrie.handleOSC(m);
+}
 
 //--------------------------------------------------------------
 void ofApp::newMidiMessage(ofxMidiMessage& msg) {
