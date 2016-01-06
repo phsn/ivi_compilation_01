@@ -1,8 +1,17 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxMidi.h"
+#include "ofxSyphon.h"
 
-class ofApp : public ofBaseApp{
+#include "ivi_FFT.h"
+#include "ivi_MIDI.h"
+
+// SYSTEME
+#include "intro/ivi_Intro.h"
+#include "schwingung/ivi_Schwingung.h"
+
+class ofApp : public ofBaseApp, public ofxMidiListener {
 
 	public:
 		void setup();
@@ -10,13 +19,33 @@ class ofApp : public ofBaseApp{
 		void draw();
 
 		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
-		
+    
+    //  SYSTEME UND FBOS  /////////////////
+    
+    ofFbo       mixerFBO;
+    ofShader    mixerShader;
+    float       t_ch01,t_ch02,t_ch03,t_ch04;
+    
+    ivi_Intro       sys_Intro;
+    ivi_Schwingung  sys_Schwingung;
+
+    //  MIDI EVENT HANDLING ///////////////
+    
+    ofxMidiIn       midiIn;
+    void            newMidiMessage(ofxMidiMessage& eventArgs);
+    
+    //  MIDI UI  //////////////////////////
+    
+    ofxMidiMessage  midiMessage;
+    stringstream    text;
+    void            drawMidiUI();
+
+    //  FFT  //////////////////////////////
+    
+    ivi_FFT FFT;
+    
+    ///////////////////////////////////////
+    
+    ofxSyphonServer iviOutput;
+
 };
