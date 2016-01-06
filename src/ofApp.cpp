@@ -22,9 +22,10 @@ void ofApp::setup(){
     
     sys_Intro.setup();
     sys_Schwingung.setup();
+    sys_Rapport.setup();
     
     mixerFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
-    mixerShader.load( "mixerShader" );
+    mixerShader.load( "shader/mixerShader" );
     
     iviOutput.setName("iviOutput");
 
@@ -41,6 +42,7 @@ void ofApp::update(){
     
     if(t_ch01 > 0) sys_Intro.update(&FFT);
     if(t_ch02 > 0) sys_Schwingung.update();
+    if(t_ch03 > 0) sys_Rapport.update(&FFT);
     
 }
 
@@ -49,13 +51,16 @@ void ofApp::draw(){
     
     ofFbo* sys_IntroFBO = sys_Intro.drawFBO((t_ch01 > 0));
     ofFbo* sys_SchwingungFBO = sys_Schwingung.drawFBO((t_ch02 > 0));
+    ofFbo* sys_RapportFBO = sys_Rapport.drawFBO((t_ch03 > 0));
     
     mixerShader.begin();
     mixerShader.setUniform1f("t_input01", t_ch01);
     mixerShader.setUniform1f("t_input02", t_ch02);
-    mixerShader.setUniformTexture("input01", sys_IntroFBO->getTextureReference(),3);
-    mixerShader.setUniformTexture("input02", sys_SchwingungFBO->getTextureReference(),6);
-    
+    mixerShader.setUniform1f("t_input03", t_ch03);
+    mixerShader.setUniformTexture("input01", sys_IntroFBO->getTextureReference(),1);
+    mixerShader.setUniformTexture("input02", sys_SchwingungFBO->getTextureReference(),2);
+    mixerShader.setUniformTexture("input03", sys_RapportFBO->getTextureReference(),3);
+
     mixerFBO.draw(0,0);
     
     mixerShader.end();
@@ -63,7 +68,7 @@ void ofApp::draw(){
     iviOutput.publishScreen();
     
     drawMidiUI();
-    
+   
 }
 
 //--------------------------------------------------------------
@@ -80,7 +85,8 @@ void ofApp::keyPressed(int key){
 void ofApp::newMidiMessage(ofxMidiMessage& msg) {
     midiMessage = msg;
     sys_Schwingung.newMidiMessage(msg);
-    
+    sys_Rapport.newMidiMessage(msg);
+
     if(msg.status == MIDI_CONTROL_CHANGE) {
         if(msg.control == IVI_MIDI_MIX_CH01) {
             //t_ch01 = ofMap(msg.value,0,127,0.0,1.0);

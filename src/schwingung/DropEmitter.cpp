@@ -8,7 +8,7 @@ DropEmitter::~DropEmitter(){}
 //--------------------------------------------------------------
 void DropEmitter::setup(int bigRadius, int smallRadius, int innrRadius){
   
-    brushShader.load("brushShader");
+    brushShader.load("shader/sys_schwingung/brushShader");
 
     
 }

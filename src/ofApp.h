@@ -10,6 +10,7 @@
 // SYSTEME
 #include "intro/ivi_Intro.h"
 #include "schwingung/ivi_Schwingung.h"
+#include "rapport/ivi_Rapport.h"
 
 class ofApp : public ofBaseApp, public ofxMidiListener {
 
@@ -28,6 +29,8 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     
     ivi_Intro       sys_Intro;
     ivi_Schwingung  sys_Schwingung;
+    ivi_Rapport     sys_Rapport;
+
 
     //  MIDI EVENT HANDLING ///////////////
     

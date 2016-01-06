@@ -24,8 +24,8 @@ void ivi_Schwingung::setup(){
     baseFBO.allocate( ofGetWidth(), ofGetHeight(), GL_RGB );
     repeatFBO.allocate( ofGetWidth(), ofGetHeight(), GL_RGB );
     
-    repeatShader.load("repeatShader");
-    fisheye.load("fisheye");
+    repeatShader.load("shader/sys_schwingung/repeatShader");
+    //fisheye.load("shader/post/fisheye");
 
 }
 
@@ -43,7 +43,7 @@ void ivi_Schwingung::update(){
 
 //--------------------------------------------------------------
 void ivi_Schwingung::draw(){
-    
+    /*
     repeatFBO.begin();
     drawRepeat();
     repeatFBO.end();
@@ -60,7 +60,7 @@ void ivi_Schwingung::draw(){
     if(shaderEnabled) {
         fisheye.end();
     }
-    
+    */
     //drawMidiUI();
 }
 

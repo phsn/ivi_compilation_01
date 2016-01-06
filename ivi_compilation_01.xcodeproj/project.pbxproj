@@ -23,6 +23,9 @@
 		21258EF71C3CA828006D8659 /* ivi_FFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21258EF51C3CA828006D8659 /* ivi_FFT.cpp */; };
 		21258F011C3CC2DB006D8659 /* ivi_on_black.icns in Resources */ = {isa = PBXBuildFile; fileRef = 21258EFF1C3CC28A006D8659 /* ivi_on_black.icns */; };
 		21258F031C3CC319006D8659 /* ivi_on_white.icns in Resources */ = {isa = PBXBuildFile; fileRef = 21258F021C3CC319006D8659 /* ivi_on_white.icns */; };
+		21258F281C3CD00D006D8659 /* ivi_Rapport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21258F221C3CD00D006D8659 /* ivi_Rapport.cpp */; };
+		21258F291C3CD00D006D8659 /* line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21258F241C3CD00D006D8659 /* line.cpp */; };
+		21258F2A1C3CD00D006D8659 /* lineScape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21258F261C3CD00D006D8659 /* lineScape.cpp */; };
 		21F8EC781C3C976D0093709F /* DropBrush.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8EC701C3C976D0093709F /* DropBrush.cpp */; };
 		21F8EC791C3C976D0093709F /* DropEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8EC721C3C976D0093709F /* DropEmitter.cpp */; };
 		21F8EC7A1C3C976D0093709F /* ivi_Schwingung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21F8EC741C3C976D0093709F /* ivi_Schwingung.cpp */; };
@@ -110,12 +113,6 @@
 		0AED834CE4DEC5260AF302A2 /* ofxOscParameterSync.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxOscParameterSync.cpp; path = ../../../addons/ofxOsc/src/ofxOscParameterSync.cpp; sourceTree = SOURCE_ROOT; };
 		208298154B11456DCD0BE131 /* ofxRtMidiIn.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxRtMidiIn.h; path = ../../../addons/ofxMidi/src/desktop/ofxRtMidiIn.h; sourceTree = SOURCE_ROOT; };
 		20F35AFADAF0068B067E713F /* OscReceivedElements.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscReceivedElements.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h; sourceTree = SOURCE_ROOT; };
-		21258EA31C3C9C7A006D8659 /* brushShader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = brushShader.frag; sourceTree = "<group>"; };
-		21258EA41C3C9C7A006D8659 /* brushShader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = brushShader.vert; sourceTree = "<group>"; };
-		21258EA51C3C9C7A006D8659 /* repeatShader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = repeatShader.frag; sourceTree = "<group>"; };
-		21258EA61C3C9C7A006D8659 /* repeatShader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = repeatShader.vert; sourceTree = "<group>"; };
-		21258EA81C3C9CA5006D8659 /* fisheye.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fisheye.frag; sourceTree = "<group>"; };
-		21258EA91C3C9CA5006D8659 /* fisheye.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fisheye.vert; sourceTree = "<group>"; };
 		21258EAB1C3CA1BC006D8659 /* ivi_MIDI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ivi_MIDI.h; sourceTree = "<group>"; };
 		21258EAC1C3CA305006D8659 /* ivi_Intro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ivi_Intro.cpp; sourceTree = "<group>"; };
 		21258EAD1C3CA305006D8659 /* ivi_Intro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ivi_Intro.h; sourceTree = "<group>"; };
@@ -132,10 +129,26 @@
 		21258EF31C3CA508006D8659 /* ivi_animation.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = ivi_animation.mov; sourceTree = "<group>"; };
 		21258EF51C3CA828006D8659 /* ivi_FFT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ivi_FFT.cpp; sourceTree = "<group>"; };
 		21258EF61C3CA828006D8659 /* ivi_FFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ivi_FFT.h; sourceTree = "<group>"; };
-		21258EF81C3CB681006D8659 /* mixerShader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = mixerShader.frag; path = bin/data/mixerShader.frag; sourceTree = SOURCE_ROOT; };
-		21258EF91C3CB681006D8659 /* mixerShader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = mixerShader.vert; path = bin/data/mixerShader.vert; sourceTree = SOURCE_ROOT; };
 		21258EFF1C3CC28A006D8659 /* ivi_on_black.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ivi_on_black.icns; sourceTree = "<group>"; };
 		21258F021C3CC319006D8659 /* ivi_on_white.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ivi_on_white.icns; sourceTree = "<group>"; };
+		21258F131C3CC7DF006D8659 /* mixerShader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = mixerShader.frag; sourceTree = "<group>"; };
+		21258F141C3CC7DF006D8659 /* mixerShader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = mixerShader.vert; sourceTree = "<group>"; };
+		21258F161C3CC7DF006D8659 /* colorizeSpectrum.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = colorizeSpectrum.frag; sourceTree = "<group>"; };
+		21258F171C3CC7DF006D8659 /* colorizeSpectrum.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = colorizeSpectrum.vert; sourceTree = "<group>"; };
+		21258F181C3CC7DF006D8659 /* fisheye.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fisheye.frag; sourceTree = "<group>"; };
+		21258F191C3CC7DF006D8659 /* fisheye.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = fisheye.vert; sourceTree = "<group>"; };
+		21258F1B1C3CC7DF006D8659 /* brushShader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = brushShader.frag; sourceTree = "<group>"; };
+		21258F1C1C3CC7DF006D8659 /* brushShader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = brushShader.vert; sourceTree = "<group>"; };
+		21258F1D1C3CC7DF006D8659 /* repeatShader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = repeatShader.frag; sourceTree = "<group>"; };
+		21258F1E1C3CC7DF006D8659 /* repeatShader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = repeatShader.vert; sourceTree = "<group>"; };
+		21258F201C3CC7DF006D8659 /* mykaleido.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = mykaleido.frag; sourceTree = "<group>"; };
+		21258F211C3CC7DF006D8659 /* mykaleido.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = mykaleido.vert; sourceTree = "<group>"; };
+		21258F221C3CD00D006D8659 /* ivi_Rapport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ivi_Rapport.cpp; sourceTree = "<group>"; };
+		21258F231C3CD00D006D8659 /* ivi_Rapport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ivi_Rapport.h; sourceTree = "<group>"; };
+		21258F241C3CD00D006D8659 /* line.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = line.cpp; sourceTree = "<group>"; };
+		21258F251C3CD00D006D8659 /* line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = line.h; sourceTree = "<group>"; };
+		21258F261C3CD00D006D8659 /* lineScape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lineScape.cpp; sourceTree = "<group>"; };
+		21258F271C3CD00D006D8659 /* lineScape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lineScape.h; sourceTree = "<group>"; };
 		21F8EC701C3C976D0093709F /* DropBrush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DropBrush.cpp; sourceTree = "<group>"; };
 		21F8EC711C3C976D0093709F /* DropBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropBrush.h; sourceTree = "<group>"; };
 		21F8EC721C3C976D0093709F /* DropEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DropEmitter.cpp; sourceTree = "<group>"; };
@@ -285,15 +298,8 @@
 		21258EA11C3C9C7A006D8659 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				21258F121C3CC7DF006D8659 /* shader */,
 				21258EF21C3CA508006D8659 /* movies */,
-				21258EF81C3CB681006D8659 /* mixerShader.frag */,
-				21258EF91C3CB681006D8659 /* mixerShader.vert */,
-				21258EA31C3C9C7A006D8659 /* brushShader.frag */,
-				21258EA41C3C9C7A006D8659 /* brushShader.vert */,
-				21258EA51C3C9C7A006D8659 /* repeatShader.frag */,
-				21258EA61C3C9C7A006D8659 /* repeatShader.vert */,
-				21258EA81C3C9CA5006D8659 /* fisheye.frag */,
-				21258EA91C3C9CA5006D8659 /* fisheye.vert */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -382,6 +388,49 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		21258F121C3CC7DF006D8659 /* shader */ = {
+			isa = PBXGroup;
+			children = (
+				21258F131C3CC7DF006D8659 /* mixerShader.frag */,
+				21258F141C3CC7DF006D8659 /* mixerShader.vert */,
+				21258F151C3CC7DF006D8659 /* post */,
+				21258F1A1C3CC7DF006D8659 /* sys_schwingung */,
+				21258F1F1C3CC7DF006D8659 /* sys_symmetrie */,
+			);
+			path = shader;
+			sourceTree = "<group>";
+		};
+		21258F151C3CC7DF006D8659 /* post */ = {
+			isa = PBXGroup;
+			children = (
+				21258F161C3CC7DF006D8659 /* colorizeSpectrum.frag */,
+				21258F171C3CC7DF006D8659 /* colorizeSpectrum.vert */,
+				21258F181C3CC7DF006D8659 /* fisheye.frag */,
+				21258F191C3CC7DF006D8659 /* fisheye.vert */,
+			);
+			path = post;
+			sourceTree = "<group>";
+		};
+		21258F1A1C3CC7DF006D8659 /* sys_schwingung */ = {
+			isa = PBXGroup;
+			children = (
+				21258F1B1C3CC7DF006D8659 /* brushShader.frag */,
+				21258F1C1C3CC7DF006D8659 /* brushShader.vert */,
+				21258F1D1C3CC7DF006D8659 /* repeatShader.frag */,
+				21258F1E1C3CC7DF006D8659 /* repeatShader.vert */,
+			);
+			path = sys_schwingung;
+			sourceTree = "<group>";
+		};
+		21258F1F1C3CC7DF006D8659 /* sys_symmetrie */ = {
+			isa = PBXGroup;
+			children = (
+				21258F201C3CC7DF006D8659 /* mykaleido.frag */,
+				21258F211C3CC7DF006D8659 /* mykaleido.vert */,
+			);
+			path = sys_symmetrie;
+			sourceTree = "<group>";
+		};
 		21F8EC6C1C3C95FC0093709F /* intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +443,12 @@
 		21F8EC6D1C3C95FC0093709F /* rapport */ = {
 			isa = PBXGroup;
 			children = (
+				21258F221C3CD00D006D8659 /* ivi_Rapport.cpp */,
+				21258F231C3CD00D006D8659 /* ivi_Rapport.h */,
+				21258F241C3CD00D006D8659 /* line.cpp */,
+				21258F251C3CD00D006D8659 /* line.h */,
+				21258F261C3CD00D006D8659 /* lineScape.cpp */,
+				21258F271C3CD00D006D8659 /* lineScape.h */,
 			);
 			path = rapport;
 			sourceTree = "<group>";
@@ -806,9 +861,11 @@
 				C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */,
 				0546D1A38E13BD319CC9755B /* OscReceivedElements.cpp in Sources */,
 				21F8EC781C3C976D0093709F /* DropBrush.cpp in Sources */,
+				21258F2A1C3CD00D006D8659 /* lineScape.cpp in Sources */,
 				21258EE61C3CA474006D8659 /* SyphonNameboundClient.m in Sources */,
 				879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */,
 				21258EEA1C3CA474006D8659 /* ofxSyphonServerDirectory.mm in Sources */,
+				21258F281C3CD00D006D8659 /* ivi_Rapport.cpp in Sources */,
 				1711FD836260FE025DDDF8C9 /* ofxFFTBase.cpp in Sources */,
 				21F8EC7A1C3C976D0093709F /* ivi_Schwingung.cpp in Sources */,
 				34B0EA6FA9243CC336D4713A /* ofxFFTFile.cpp in Sources */,
@@ -821,6 +878,7 @@
 				21F8EC7B1C3C976D0093709F /* Spiropath.cpp in Sources */,
 				3AEFE4FA8AD5C72671AD07F8 /* ofxRtMidiOut.cpp in Sources */,
 				1A86B7721CAEBC6F1C572C45 /* ofxBaseMidi.cpp in Sources */,
+				21258F291C3CD00D006D8659 /* line.cpp in Sources */,
 				63F9FE1D90234FA6DE6F509E /* ofxMidi.cpp in Sources */,
 				0BFC9C20FD7E3C8D5873AA97 /* ofxMidiIn.cpp in Sources */,
 				21258EE91C3CA474006D8659 /* ofxSyphonServer.mm in Sources */,
