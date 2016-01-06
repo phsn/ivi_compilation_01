@@ -21,13 +21,16 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
 	public:
 		void setup();
 		void update();
-		void draw();
+		
+        void drawMixer();
+        void drawColor();
+        void draw();
 
 		void keyPressed(int key);
     
     //  SYSTEME UND FBOS  /////////////////
     
-    ofFbo       mixerFBO;
+    ofFbo       sourceFBO;
     ofShader    mixerShader;
     float       t_ch01,t_ch02,t_ch03,t_ch04;
     
@@ -35,7 +38,16 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     ivi_Schwingung  sys_Schwingung;
     ivi_Rapport     sys_Rapport;
     ivi_Symmetrie   sys_Symmetrie;
-
+    
+    //  POST-SHADER UND FBOS  /////////////
+    
+    ofFbo       mixerFBO;
+    ofFbo       colorFBO;
+    
+    ofShader    fisheyeShader;
+    ofShader    colorShader;
+    ofImage     specRef;
+    
     //  MIDI EVENT HANDLING ///////////////
     
     ofxMidiIn       midiIn;

@@ -6,48 +6,59 @@ void ofApp::setup(){
     t_ch01 = 1.0;
     t_ch02,t_ch03,t_ch04 = 0.0;
     
-    
     //  MIDI SETUP  ///////////////////////
 
-    // midiIn.listPorts();
-    midiIn.openPort(0);
-    midiIn.addListener(this);
+     // midiIn.listPorts();
+     midiIn.openPort(0);
+     midiIn.addListener(this);
     
     //  FFT  //////////////////////////////
     
-    // FFT.listDevices();
-    FFT.setup(5);
+     // FFT.listDevices();
+     FFT.setup(5);
     
     //  SYSTEME  //////////////////////////
     
-    sys_Intro.setup();
-    sys_Schwingung.setup();
-    sys_Rapport.setup();
-    sys_Symmetrie.setup(oscThread);
+     sys_Intro.setup();
+     sys_Schwingung.setup();
+     sys_Rapport.setup();
+     sys_Symmetrie.setup(oscThread);
     
-    mixerFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
-    mixerShader.load( "shader/mixerShader" );
+    //  MIXER UND FBO  ////////////////////
     
-    iviOutput.setName("iviOutput");
+     sourceFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
+     mixerShader.load( "shader/mixerShader" );
     
-    // THREADS  ///////////////////////////
+    //  POST-SHADER UND FBOS  /////////////
     
-    ofAddListener(beatThread.tickEvent, this, &ofApp::onTick);
-    ofAddListener(beatThread.tick8Event, this, &ofApp::onTick8);
-    ofAddListener(beatThread.tick16Event, this, &ofApp::onTick16);
-    ofAddListener(beatThread.tickRhythmEvent, this, &ofApp::onTickRhythm);
-    ofAddListener(beatThread.barEvent, this, &ofApp::onBar);
+     mixerFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
+     colorFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
     
-    ofAddListener(beatThread.bpmChange, this, &ofApp::onBPMChange);
-    ofAddListener(beatThread.rhythmMaskChange, this, &ofApp::onRhythmChange);
+     fisheyeShader.load("shader/post/fisheye");
+     colorShader.load("shader/post/colorize");
+     specRef.loadImage("shader/post/spectrum.png");
     
-    beatThread.start();
+    // OSC-THREAD  /&//////////////////////
     
-    ofAddListener(oscThread.messageReceived, this, &ofApp::handleOSC);
+     ofAddListener(oscThread.messageReceived, this, &ofApp::handleOSC);
     
-    oscThread.setup(IVI_OSC_HOST,IVI_OSC_PORT);
-    oscThread.start();
+     oscThread.setup(IVI_OSC_HOST,IVI_OSC_PORT);
+     oscThread.start();
+    
+    // BEAT-THREAD  ///////////////////////
+    
+     ofAddListener(beatThread.tickEvent, this, &ofApp::onTick);
+     ofAddListener(beatThread.tick8Event, this, &ofApp::onTick8);
+     ofAddListener(beatThread.tick16Event, this, &ofApp::onTick16);
+     ofAddListener(beatThread.tickRhythmEvent, this, &ofApp::onTickRhythm);
+     ofAddListener(beatThread.barEvent, this, &ofApp::onBar);
+    
+     ofAddListener(beatThread.bpmChange, this, &ofApp::onBPMChange);
+     ofAddListener(beatThread.rhythmMaskChange, this, &ofApp::onRhythmChange);
+    
+     beatThread.start();
 
+    iviOutput.setName("iviOutput");
 }
 
 //--------------------------------------------------------------
@@ -67,13 +78,12 @@ void ofApp::update(){
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::drawMixer(){
     
     ofFbo* sys_IntroFBO = sys_Intro.drawFBO((t_ch01 > 0));
     ofFbo* sys_SchwingungFBO = sys_Schwingung.drawFBO((t_ch02 > 0));
     ofFbo* sys_RapportFBO = sys_Rapport.drawFBO((t_ch03 > 0));
     ofFbo* sys_SymmetrieFBO = sys_Symmetrie.drawFBO((t_ch04 > 0));
-
     
     mixerShader.begin();
     mixerShader.setUniform1f("t_input01", t_ch01);
@@ -85,14 +95,48 @@ void ofApp::draw(){
     mixerShader.setUniformTexture("input03", sys_RapportFBO->getTextureReference(),3);
     mixerShader.setUniformTexture("input04", sys_SymmetrieFBO->getTextureReference(),4);
     
-    mixerFBO.draw(0,0);
+    sourceFBO.draw(0,0);
     
     mixerShader.end();
+   
+}
+
+//--------------------------------------------------------------
+void ofApp::drawColor(){
+    
+    mixerFBO.begin();
+    drawMixer();
+    mixerFBO.end();
+    
+    colorShader.begin();
+    colorShader.setUniform1f("spectrumPosition",ofGetMouseX()/float(ofGetWidth()));
+    colorShader.setUniform2f("screenSize", ofGetWidth(), ofGetHeight());
+    colorShader.setUniformTexture("spectrum", specRef.getTextureReference(),3);
+    
+    mixerFBO.draw(0,0);
+    
+    colorShader.end();
+}
+
+
+//--------------------------------------------------------------
+void ofApp::draw(){
+    
+    colorFBO.begin();
+    drawColor();
+    colorFBO.end();
+    
+    fisheyeShader.begin();
+    fisheyeShader.setUniform2f( "iResolution", ofGetWidth(), ofGetHeight()*1.77);
+    fisheyeShader.setUniform2f( "iMouse", ofGetMouseX(), ofGetMouseY());
+    fisheyeShader.setUniform1f( "chromAbb", ofGetMouseY());
+
+    colorFBO.draw(0,0);
+    
+    fisheyeShader.end();
     
     iviOutput.publishScreen();
-    
     drawMidiUI();
-   
 }
 
 //--------------------------------------------------------------

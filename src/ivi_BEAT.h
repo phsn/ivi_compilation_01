@@ -40,6 +40,7 @@ public:
         // Mutex blocking is set to true by default
         // It is rare that one would want to use startThread(false).
         startThread();
+        
     }
     
     /// Signal the thread to stop.  After calling this method,
@@ -129,6 +130,24 @@ public:
     }
     
     void tick() {
+        
+        if(initRhythmMask) {
+            
+            vector<bool> newMask;
+            
+            newMask.assign(16,false);
+            newMask[0] = true;
+            newMask[4] = true;
+            newMask[8] = true;
+            newMask[12] = true;
+            
+            setRhythmMask(newMask);
+            
+            ofVec2f tData = ofVec2f(0, beatState);
+            ofNotifyEvent(rhythmMaskChange, tData, this);
+            
+            initRhythmMask = false;
+        }
         
         //if(ofGetElapsedTimef()-lastTick > tickTime/8.0f) {
         ofVec2f tData = ofVec2f(tick16Start, beat16State);
@@ -360,5 +379,6 @@ protected:
     bool firstRecord = false;
     
     bool SYNC;
+    bool initRhythmMask = true;
     
 };
